@@ -1,0 +1,161 @@
+Altera SOPC Builder Version 7.20 Build 151
+Copyright (c) 1999-2007 Altera Corporation.  All rights reserved.
+
+
+# 2007.11.20 09:53:38 (*) mk_custom_sdk starting
+# 2007.11.20 09:53:38 (*) Reading project C:/DE2_70/DE2_70_Demonstrations/DE2_70_NET/DE2_70_SOPC.ptf.
+
+# 2007.11.20 09:53:39 (*) Finding all CPUs
+# 2007.11.20 09:53:39 (*) Finding all available components
+# 2007.11.20 09:53:39 (*) Reading C:/DE2_70/DE2_70_Demonstrations/DE2_70_NET/.sopc_builder/install.ptf
+
+# 2007.11.20 09:53:39 (*) Found 81 components
+
+# 2007.11.20 09:53:40 (*) Finding all peripherals
+
+# 2007.11.20 09:53:41 (*) Finding software components
+
+# 2007.11.20 09:53:42 (*) (Legacy SDK Generation Skipped)
+# 2007.11.20 09:53:42 (*) (All TCL Script Generation Skipped)
+# 2007.11.20 09:53:42 (*) (No Libraries Built)
+# 2007.11.20 09:53:42 (*) (Contents Generation Skipped)
+# 2007.11.20 09:53:42 (*) mk_custom_sdk finishing
+
+# 2007.11.20 09:53:42 (*) Starting generation for system: DE2_70_SOPC.
+
+.
+.
+..
+..
+.
+..
+.
+.
+.
+.
+.
+.
+.
+.
+......
+.
+.
+..
+
+# 2007.11.20 09:53:45 (*) Running Generator Program for cpu
+
+# 2007.11.20 09:53:47 (*)   Checking for plaintext license.
+# 2007.11.20 09:53:47 (*)   Plaintext license not found.
+# 2007.11.20 09:53:47 (*)   Checking for encrypted license (non-evaluation).
+# 2007.11.20 09:53:48 (*)   Encrypted license found.  SOF will not be time-limited.
+# 2007.11.20 09:54:00 (*)   Creating encrypted HDL
+
+# 2007.11.20 09:54:04 (*) Running Generator Program for onchip_mem
+
+# 2007.11.20 09:54:06 (*) Running Generator Program for pio_green_led
+
+# 2007.11.20 09:54:09 (*) Running Generator Program for pio_red_led
+
+# 2007.11.20 09:54:11 (*) Running Generator Program for pio_switch
+
+# 2007.11.20 09:54:13 (*) Running Generator Program for pio_button
+
+# 2007.11.20 09:54:16 (*) Running Generator Program for lcd
+
+# 2007.11.20 09:54:18 (*) Running Generator Program for sdram_u1
+
+# 2007.11.20 09:54:21 (*) Running Generator Program for sdram_u2
+
+# 2007.11.20 09:54:24 (*) Running Generator Program for ssram
+
+# 2007.11.20 09:54:26 (*) Running Generator Program for cfi_flash
+
+# 2007.11.20 09:54:28 (*) Running Generator Program for sysid
+
+# 2007.11.20 09:54:30 (*) Running Generator Program for timer
+
+# 2007.11.20 09:54:33 (*) Running Generator Program for timer_stamp
+
+# 2007.11.20 09:54:35 (*) Running Generator Program for jtag_uart
+
+# 2007.11.20 09:54:38 (*) Running Generator Program for uart
+
+# 2007.11.20 09:54:42 (*) Running Generator Program for pll
+
+# 2007.11.20 09:54:46 (*) Running Generator Program for i2c_sclk
+
+# 2007.11.20 09:54:49 (*) Running Generator Program for i2c_sdat
+
+# 2007.11.20 09:54:51 (*) Running Generator Program for sd_clk
+
+# 2007.11.20 09:54:54 (*) Running Generator Program for sd_cmd
+
+# 2007.11.20 09:54:56 (*) Running Generator Program for sd_dat
+
+# 2007.11.20 09:54:59 (*) Running Generator Program for sd_dat3
+
+# 2007.11.20 09:55:01 (*) Running Generator Program for ps2_keyboard
+
+# 2007.11.20 09:55:07 (*) Running Generator Program for ps2_mouse
+
+# 2007.11.20 09:55:14 (*) Running Generator Program for clock_0
+
+# 2007.11.20 09:55:17 (*) Running Generator Program for clock_1
+
+..
+
+
+# 2007.11.20 09:55:20 (*) Running Test Generator Program for sdram_u1
+
+# 2007.11.20 09:55:22 (*) Running Test Generator Program for sdram_u2
+
+# 2007.11.20 09:55:24 (*) Making arbitration and system (top) modules.
+
+# 2007.11.20 09:56:16 (*) Generating Quartus symbol for top level: DE2_70_SOPC
+
+# 2007.11.20 09:56:17 (*) Generating Symbol C:/DE2_70/DE2_70_Demonstrations/DE2_70_NET/DE2_70_SOPC.bsf
+
+# 2007.11.20 09:56:17 (*) Creating command-line system-generation script: C:/DE2_70/DE2_70_Demonstrations/DE2_70_NET/DE2_70_SOPC_generation_script
+
+# 2007.11.20 09:56:17 (*) Running setup for HDL simulator: modelsim
+
+
+# 2007.11.20 09:56:18 (*) Setting up Quartus with DE2_70_SOPC_setup_quartus.tcl
+c:/altera/72/quartus/bin/quartus_sh -t DE2_70_SOPC_setup_quartus.tcl
+
+
+Info: *******************************************************************
+Info: Running Quartus II Shell
+    Info: Version 7.2 Build 151 09/26/2007 SJ Full Version
+    Info: Copyright (C) 1991-2007 Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and its AMPP partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, Altera MegaCore Function License 
+    Info: Agreement, or other applicable license agreement, including, 
+    Info: without limitation, that your use is for the sole purpose of 
+    Info: programming logic devices manufactured by Altera and sold by 
+    Info: Altera or its authorized distributors.  Please refer 
+to the 
+    Info: applicable agreement for further details.
+    Info: Processing started: Tue Nov 20 09:56:18 2007
+Info: Command: quartus_sh -t DE2_70_SOPC_setup_quartus.tcl
+Info: Evaluation of Tcl script DE2_70_SOPC_setup_quartus.tcl was successful
+Info: Quartus II Shell was successful. 0 errors, 0 warnings
+    Info: Allocated 46 megabytes of memory during processing
+    Info: Processing ended: Tue Nov 20 09:56:18 2007
+    Info: Elapsed time: 00:00:00
+
+# 2007.11.20 09:56:19 (*) Completed generation for system: DE2_70_SOPC.
+# 2007.11.20 09:56:19 (*) THE FOLLOWING SYSTEM ITEMS HAVE BEEN GENERATED:
+  SOPC Builder database : C:/DE2_70/DE2_70_Demonstrations/DE2_70_NET/DE2_70_SOPC.ptf 
+  System HDL Model : C:/DE2_70/DE2_70_Demonstrations/DE2_70_NET/DE2_70_SOPC.v 
+  System Generation Script : C:/DE2_70/DE2_70_Demonstrations/DE2_70_NET/DE2_70_SOPC_generation_script 
+
+# 2007.11.20 09:56:19 (*) SUCCESS: SYSTEM GENERATION COMPLETED.
+
+
+Press 'Exit' to exit.

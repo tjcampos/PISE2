@@ -1,0 +1,11 @@
+set_global_assignment -name SOURCE_FILE [file join $::quartus(qip_path) C:/DE2_70/DE2_70_Demonstrations/DE2_70_NET/ip/TERASIC_ISP1362/hdl/ISP1362_IF_hw.tcl]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) C:/DE2_70/DE2_70_Demonstrations/DE2_70_NET/ip/TERASIC_ISP1362/hdl/ISP1362_IF.v]
+ set_global_assignment -name SOURCE_FILE [file join $::quartus(qip_path) C:/DE2_70/DE2_70_Demonstrations/DE2_70_NET/ip/TERASIC_SEG7/hdl/SEG7_IF_hw.tcl]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) C:/DE2_70/DE2_70_Demonstrations/DE2_70_NET/ip/TERASIC_SEG7/hdl/SEG7_IF.v]
+ set_global_assignment -name SOURCE_FILE [file join $::quartus(qip_path) C:/DE2_70/DE2_70_Demonstrations/DE2_70_NET/ip/TERASIC_AUDIO/hdl/AUDIO_IF_hw.tcl]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) C:/DE2_70/DE2_70_Demonstrations/DE2_70_NET/ip/TERASIC_AUDIO/hdl/AUDIO_IF.v]
+ set_global_assignment -name SOURCE_FILE [file join $::quartus(qip_path) C:/DE2_70/DE2_70_Demonstrations/DE2_70_NET/ip/TERASIC_Binary_VGA_Controller/hdl/Binary_VGA_Control_IF_hw.tcl]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) C:/DE2_70/DE2_70_Demonstrations/DE2_70_NET/ip/TERASIC_Binary_VGA_Controller/hdl/VGA_NIOS_CTRL.v]
+ set_global_assignment -name SOURCE_FILE [file join $::quartus(qip_path) c:/DE2_70/DE2_70_Demonstrations/DE2_70_NET/ip/TERASIC_DM9000A/hdl/DM9000A_IF_hw.tcl]
+set_global_assignment -name VERILOG_FILE [file join $::quartus(qip_path) c:/DE2_70/DE2_70_Demonstrations/DE2_70_NET/ip/TERASIC_DM9000A/hdl/DM9000A_IF.v]
+ 

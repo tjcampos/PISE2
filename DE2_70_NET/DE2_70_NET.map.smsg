@@ -1,0 +1,23 @@
+Warning (10236): Verilog HDL Implicit Net warning at DE2_70_NET.v(416): created implicit net for "FL_RST_N"
+Warning (10236): Verilog HDL Implicit Net warning at AUDIO_IF.v(176): created implicit net for "fifo_clear"
+Warning (10230): Verilog HDL assignment warning at AUDIO_IF.v(146): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at AUDIO_DAC.v(79): truncated value with size 32 to match size of target (1)
+Warning (10230): Verilog HDL assignment warning at AUDIO_DAC.v(85): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at AUDIO_DAC.v(100): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at AUDIO_ADC.v(80): truncated value with size 32 to match size of target (1)
+Warning (10230): Verilog HDL assignment warning at AUDIO_ADC.v(82): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at AUDIO_ADC.v(88): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at VGA_NIOS_CTRL.v(83): truncated value with size 16 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at VGA_NIOS_CTRL.v(84): truncated value with size 16 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at VGA_NIOS_CTRL.v(85): truncated value with size 16 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at VGA_NIOS_CTRL.v(86): truncated value with size 16 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at VGA_NIOS_CTRL.v(87): truncated value with size 16 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at VGA_NIOS_CTRL.v(88): truncated value with size 16 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at VGA_NIOS_CTRL.v(89): truncated value with size 16 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at VGA_NIOS_CTRL.v(90): truncated value with size 16 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at VGA_NIOS_CTRL.v(91): truncated value with size 16 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at VGA_NIOS_CTRL.v(92): truncated value with size 16 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at VGA_NIOS_CTRL.v(93): truncated value with size 16 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at VGA_NIOS_CTRL.v(94): truncated value with size 16 to match size of target (10)
+Warning (10273): Verilog HDL warning at lcd.v(57): extended using "x" or "z"
+Warning (10262): Verilog HDL Event Control warning at pll.v(98): event expression is a constant

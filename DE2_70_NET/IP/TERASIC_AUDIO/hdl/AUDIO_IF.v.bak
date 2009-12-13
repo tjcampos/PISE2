@@ -1,0 +1,229 @@
+// --------------------------------------------------------------------
+// Copyright (c) 2007 by Terasic Technologies Inc. 
+// --------------------------------------------------------------------
+//
+// Permission:
+//
+//   Terasic grants permission to use and modify this code for use
+//   in synthesis for all Terasic Development Boards and Altera Development 
+//   Kits made by Terasic.  Other use of this code, including the selling 
+//   ,duplication, or modification of any portion is strictly prohibited.
+//
+// Disclaimer:
+//
+//   This VHDL/Verilog or C/C++ source code is intended as a design reference
+//   which illustrates how these types of functions can be implemented.
+//   It is the user's responsibility to verify their design for
+//   consistency and functionality through the use of formal
+//   verification methods.  Terasic provides no warranty regarding the use 
+//   or functionality of this code.
+//
+// --------------------------------------------------------------------
+//           
+//                     Terasic Technologies Inc
+//                     356 Fu-Shin E. Rd Sec. 1. JhuBei City,
+//                     HsinChu County, Taiwan
+//                     302
+//
+//                     web: http://www.terasic.com/
+//                     email: support@terasic.com
+//
+// --------------------------------------------------------------------
+
+/*
+
+Function: 
+	WOLFSON WM8731 controller
+	
+I2C Configuration Requirements:
+	Master Mode
+	Left Justified Mode, 16-bits
+	
+Clock:
+	18.324MHz to XTI/MCLK pin of WM8731
+	
+Revision:
+	1.0, 09/28/2007, Init by Richard
+	
+Compatibility:
+	Quartus 7.1
+
+*/
+
+`include ".\AUDIO_ADC.v"
+`include ".\AUDIO_DAC.v"
+`include ".\audio_fifo.v"
+
+
+module AUDIO_IF(
+	avs_s1_clk,
+	avs_s1_reset,
+	avs_s1_address,
+	avs_s1_read,
+	avs_s1_readdata,
+	avs_s1_write,
+	avs_s1_writedata,
+	//
+	avs_s1_export_BCLK,
+	avs_s1_export_DACLRC,
+	avs_s1_export_DACDAT,
+	avs_s1_export_ADCLRC,
+	avs_s1_export_ADCDAT
+);
+
+/*****************************************************************************
+ *                           Constant Declarations                           *
+ *****************************************************************************/
+`define DATA_WIDTH		32
+`define ADDR_WIDTH		4
+`define DAC_FIFO_ADDR	0
+`define ADC_FIFO_ADDR	1
+`define CMD_ADDR		2
+`define STATUS_ADDR		3
+`define FIFO_CLEAR  	1'b1
+`define FIFO_CLEAR_END_CNT	5
+
+/*****************************************************************************
+ *                             Port Declarations                             *
+ *****************************************************************************/
+input							avs_s1_clk;
+input							avs_s1_reset;
+input		[(`ADDR_WIDTH-1):0]	avs_s1_address;
+input							avs_s1_read;
+output		[(`DATA_WIDTH-1):0]	avs_s1_readdata;
+input							avs_s1_write;
+input		[(`DATA_WIDTH-1):0]	avs_s1_writedata;
+	//
+input							avs_s1_export_BCLK;
+input							avs_s1_export_DACLRC;
+output							avs_s1_export_DACDAT;
+input							avs_s1_export_ADCLRC;
+input							avs_s1_export_ADCDAT;
+
+
+
+/*****************************************************************************
+ *                 Internal wires and registers Declarations                 *
+ *****************************************************************************/
+// host
+reg		[(`DATA_WIDTH-1):0]		reg_readdata;
+reg		[(`DATA_WIDTH-1):0]		reg_writedata;
+reg								reg_fifo_clear;
+reg		[3:0]					reg_fifo_clear_cnt;
+
+// dac
+wire							dacfifo_full;
+wire 							dacfifo_write;
+wire	[(`DATA_WIDTH-1):0]		dacfifo_writedata;
+
+// adc
+wire							adcfifo_empty;
+wire 							adcfifo_read;
+wire	[(`DATA_WIDTH-1):0]		adcfifo_readdata;
+
+
+/*****************************************************************************
+ *                             Sequential logic                              *
+ *****************************************************************************/
+// control fifo clear
+always @ (negedge avs_s1_clk)
+begin
+	if (avs_s1_reset)
+	begin
+		reg_fifo_clear = 0; 
+		reg_fifo_clear_cnt = 0;
+	end
+	else if (avs_s1_address == `CMD_ADDR && avs_s1_write && avs_s1_writedata[0])  // Set CMD
+	begin   // clear fifo
+		reg_fifo_clear = 1; //avs_s1_writedata[0];
+		reg_fifo_clear_cnt = 0;
+	end
+	else if (reg_fifo_clear)
+	begin
+		if (reg_fifo_clear_cnt == `FIFO_CLEAR_END_CNT)
+			reg_fifo_clear = 0;
+		else
+			reg_fifo_clear_cnt = reg_fifo_clear_cnt + 1;
+	end
+end
+
+// fifo data/status read
+always @ (negedge avs_s1_clk)
+begin
+	if (avs_s1_read)
+	begin
+		if (avs_s1_address == `ADC_FIFO_ADDR)
+			reg_readdata = adcfifo_readdata;
+		else if (avs_s1_address == `STATUS_ADDR)
+			reg_readdata = {adcfifo_empty, dacfifo_full};
+	end
+end
+
+// fifo data write
+always @ (posedge avs_s1_clk)
+begin
+	if (avs_s1_write && (avs_s1_address == `DAC_FIFO_ADDR))
+		reg_writedata = avs_s1_writedata;
+end
+
+/*****************************************************************************
+ *                            Combinational logic                            *
+ *****************************************************************************/
+// slave data/status read
+assign	avs_s1_readdata = reg_readdata;
+
+// both fio
+assign fifo_clear = reg_fifo_clear; 
+
+// dac
+assign dacfifo_write = ((avs_s1_address == `DAC_FIFO_ADDR) && avs_s1_write && !dacfifo_full)?1'b1:1'b0;
+assign	dacfifo_writedata = reg_writedata;
+//assign dacfifo_writedata = (avs_s1_address == `DAC_FIFO_ADDR)?avs_s1_writedata:`DATA_WIDTH'bz;
+
+// adc
+assign	adcfifo_read = ((avs_s1_address == `ADC_FIFO_ADDR) && avs_s1_read && !adcfifo_empty)?1'b1:1'b0;
+
+
+/*****************************************************************************
+ *                              Internal Modules                             *
+ *****************************************************************************/
+
+AUDIO_DAC DAC_Instance(
+	// host
+	.clk(~avs_s1_clk),
+	.reset(avs_s1_reset),
+	.write(dacfifo_write),
+	.writedata(dacfifo_writedata),
+	.full(dacfifo_full),
+	.clear(fifo_clear),
+	// dac
+	.bclk(avs_s1_export_BCLK),
+	.daclrc(avs_s1_export_DACLRC),
+	.dacdat(avs_s1_export_DACDAT)
+);
+
+AUDIO_ADC ADC_Instance(
+	// host
+	.clk(avs_s1_clk),
+	.reset(avs_s1_reset),
+	.read(adcfifo_read),
+	.readdata(adcfifo_readdata),
+	.empty(adcfifo_empty),
+	.clear(fifo_clear),
+	// dac
+	.bclk(avs_s1_export_BCLK),
+	.adclrc(avs_s1_export_ADCLRC),
+	.adcdat(avs_s1_export_ADCDAT)
+);
+
+
+defparam
+	DAC_Instance.DATA_WIDTH = 32;
+
+defparam
+	ADC_Instance.DATA_WIDTH = 32;
+
+
+endmodule
+
+

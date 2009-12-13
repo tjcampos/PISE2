@@ -1,0 +1,51 @@
+#include "basic_io.h"
+#include "Test.h"
+#include "LCD.h"
+#include "DM9000A.C"
+#include "SEG7.h"
+
+unsigned int aaa,rx_len,i;
+unsigned char RXT[608];
+unsigned char TXT[600] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+unsigned char *seq;
+
+void ethernet_interrupts()
+{
+        aaa=ReceivePacket (RXT,&rx_len);
+        if(!aaa)
+        {
+                if ((*seq+1)%256 == RXT[6]){
+                        //        printf("%s\n",RXT+7);
+                        *seq = (*seq +1)%256;
+                        SEG7_Hex(*seq, 0);
+                        LCD_Init();
+                        if(strlen(RXT+7)<16){
+                            LCD_Show_Text(RXT+7);
+                        }
+                        else{
+                            LCD_Show_Text(RXT+7);
+                            LCD_Line2();
+                            LCD_Show_Text(RXT+23);
+                        }   
+                }
+        }
+        //outport(SEG7_DISPLAY_BASE,packet_num);
+        iow(RCR , RCR_set | RX_ENABLE | PASS_MULTICAST);
+        alt_irq_register( DM9000A_IRQ, NULL, (void*)ethernet_interrupts );
+}
+
+
+int main(void)
+{
+        LCD_Test();
+        DM9000_init();
+        seq = &(TXT[6]);
+        SEG7_Hex(0, 0);
+        alt_irq_register( DM9000A_IRQ, NULL, (void*)ethernet_interrupts );
+             
+        while (1){
+                TransmitPacket(TXT,600);
+        }
+
+        return 0;
+}
